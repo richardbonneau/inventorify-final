@@ -15,7 +15,7 @@ const config = require('../config/webpack.config.js');
 
 const ShopifyAPIClient = require('shopify-api-node');
 const ShopifyExpress = require('@shopify/shopify-express');
-const {MemoryStrategy} = require('@shopify/shopify-express/strategies');
+const { MemoryStrategy } = require('@shopify/shopify-express/strategies');
 
 const {
   SHOPIFY_APP_KEY,
@@ -28,7 +28,7 @@ const shopifyConfig = {
   host: SHOPIFY_APP_HOST,
   apiKey: SHOPIFY_APP_KEY,
   secret: SHOPIFY_APP_SECRET,
-  scope: ['write_orders, write_products'],
+  scope: ['write_orders, write_products, write_inventory'],
   shopStore: new MemoryStrategy(),
   afterAuth(request, response) {
     const { session: { accessToken, shop } } = request;
@@ -43,7 +43,7 @@ const shopifyConfig = {
   },
 };
 
-const registerWebhook = function(shopDomain, accessToken, webhook) {
+const registerWebhook = function (shopDomain, accessToken, webhook) {
   const shopify = new ShopifyAPIClient({ shopName: shopDomain, accessToken: accessToken });
   shopify.webhook.create(webhook).then(
     response => console.log(`webhook '${webhook.topic}' created`),
@@ -98,13 +98,13 @@ app.get('/install', (req, res) => res.render('install'));
 const shopify = ShopifyExpress(shopifyConfig);
 
 // Mount Shopify Routes
-const {routes, middleware} = shopify;
-const {withShop, withWebhook} = middleware;
+const { routes, middleware } = shopify;
+const { withShop, withWebhook } = middleware;
 
 app.use('/shopify', routes);
 
 // Client
-app.get('/', withShop({authBaseUrl: '/shopify'}), function(request, response) {
+app.get('/', withShop({ authBaseUrl: '/shopify' }), function (request, response) {
   const { session: { shop, accessToken } } = request;
   response.render('app', {
     title: 'Shopify Node App',
@@ -125,13 +125,13 @@ app.post('/order-create', withWebhook((error, request) => {
 }));
 
 // Error Handlers
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
-app.use(function(error, request, response, next) {
+app.use(function (error, request, response, next) {
   response.locals.message = error.message;
   response.locals.error = request.app.get('env') === 'development' ? error : {};
 
