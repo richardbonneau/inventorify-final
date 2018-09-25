@@ -15,7 +15,7 @@
     "postinstall": "NODE_ENV=production webpack --config ./config/webpack.config.js"
   },
   "engines": {
-    "node": ">= 8.9.1"
+    "node": "^8.9.1"
   },
   "browsers": [
     "last 3 chrome versions",
