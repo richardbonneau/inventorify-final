@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import asyncPool from "tiny-async-pool"
 
 import { Layout, TextField, FormLayout, Select, Button, ChoiceList, Banner } from '@shopify/polaris';
 
