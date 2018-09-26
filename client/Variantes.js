@@ -42,4 +42,4 @@ export const COULEUR = [
 ]
 
 //  À modifier si on change de shopify store
-STORELOCATION = 14069366849;
+export const STORELOCATION = 14069366849;

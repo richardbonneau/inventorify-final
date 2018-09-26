@@ -26,7 +26,6 @@ export default class Main extends Component {
             isApplyInventoryDisabled: false,
             isApplyPricesDisabled: false,
 
-
             numModifLeft: 0,
         }
     }
