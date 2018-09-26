@@ -109,8 +109,8 @@ export default class Main extends Component {
             variantIds: letVariantIds,
             inventoryIds: letInventoryIds
         }, () => {
-            console.log("filteredList", filterColor[0].variants)
-            console.log("state", this.state.listProductsToModify)
+            // console.log("filteredList", filterColor[0].variants)
+            // console.log("state", this.state.listProductsToModify)
         })
 
     }
@@ -118,7 +118,7 @@ export default class Main extends Component {
     //  Apply Changes
     applyChangesToInventory = () => {
         let result = window.confirm(
-            "Vous êtes sur le point de modifier l'inventaire' de " + this.state.inventoryIds.length + " variantes.\nÊtes-vous sûr de vouloir continuer?"
+            "Vous êtes sur le point de modifier l'inventaire de " + this.state.inventoryIds.length + " variantes.\nÊtes-vous sûr de vouloir continuer?"
         );
 
         let delayIncrement = 500;
@@ -186,7 +186,7 @@ export default class Main extends Component {
                         }))
                         .then(response => response.json())
                         .then(responseJson => {
-                            console.log(responseJson);
+                            // console.log(responseJson);
                             array.push(responseJson)
                         })
                 );
@@ -211,10 +211,7 @@ export default class Main extends Component {
     render() {
         return (
             <div >
-                <Button fullWidth={true} loading={this.state.isFetchLoading} size="slim" onClick={this.fetchAllProducts}>Fetch</Button>
-
-
-                <div style={{ height: '15px' }} />
+                <div style={{ height: '20px' }} />
                 <FormLayout>
                     <Select
                         label="Genre"

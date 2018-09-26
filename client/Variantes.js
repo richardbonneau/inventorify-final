@@ -1,3 +1,6 @@
+//  Les catégories GENRE et BASE font une recherche dans le titre des produits
+//  Les catégories TAILLE et COULEUR vont chercher le nom des variantes directement
+
 export const GENRE = [
     { label: "Tous", value: "" },
     { label: "Hommes", value: "homme" },
@@ -15,6 +18,7 @@ export const BASE = [
 
 export const TAILLE = [
     { label: "Tous", value: "" },
+    { label: "XS", value: "XS" },
     { label: "S", value: "S" },
     { label: "M", value: "M" },
     { label: "L", value: "L" },
@@ -27,8 +31,6 @@ export const TAILLE = [
     { label: "3T", value: "3T" },
     { label: "4T", value: "4T" },
     { label: "5-6T", value: "5-6T" },
-
-
 ]
 
 export const COULEUR = [
