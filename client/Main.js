@@ -25,6 +25,9 @@ export default class Main extends Component {
             priceInput: "",
             isApplyInventoryLoading: false,
             isApplyPricesLoading: false,
+            isApplyInventoryDisabled: false,
+            isApplyPricesDisabled: false,
+
 
             numModifLeft: 0,
         }
@@ -125,7 +128,7 @@ export default class Main extends Component {
         let delay = 0;
 
         if (result == true) {
-            this.setState({ isApplyInventoryLoading: true })
+            this.setState({ isApplyInventoryLoading: true, isApplyPricesDisabled: true })
             let array = new Array();
             var fetches = [];
             for (let i = 0; i < this.state.inventoryIds.length; i++) {
@@ -156,7 +159,6 @@ export default class Main extends Component {
                 location.reload();
             });
         }
-
     }
 
     applyChangesToPrice = () => {
@@ -168,7 +170,7 @@ export default class Main extends Component {
         let delay = 0;
 
         if (result == true) {
-            this.setState({ isApplyPricesLoading: true })
+            this.setState({ isApplyPricesLoading: true, isApplyInventoryDisabled: true })
             let array = new Array();
             var fetches = [];
             for (let i = 0; i < this.state.variantIds.length; i++) {
@@ -237,7 +239,6 @@ export default class Main extends Component {
                         onChange={this.handleColorChange}
                         value={this.state.color}
                     />
-
                 </FormLayout>
 
                 <div style={{ height: '15px' }} />
@@ -246,13 +247,27 @@ export default class Main extends Component {
                     <TextField label="Quantité" type="number" onChange={this.handleQuantityChange} value={this.state.quantityInput} />
                     <TextField label="Prix" prefix="$" type="number" onChange={this.handlePriceChange} value={this.state.priceInput} />
                 </FormLayout.Group>
+
                 <FormLayout.Group>
-                    <Button primary fullWidth={true} onClick={this.applyChangesToInventory} loading={this.state.isApplyInventoryLoading} >Changer Inventaire</Button>
-                    <Button primary fullWidth={true} onClick={this.applyChangesToPrice} loading={this.state.isApplyPricesLoading} >Changer Prix</Button>
+                    <Button primary
+                        fullWidth={true}
+                        onClick={this.applyChangesToInventory}
+                        loading={this.state.isApplyInventoryLoading}
+                        disabled={this.state.isApplyInventoryDisabled} >
+                        Changer l'Inventaire
+                    </Button>
+
+                    <Button primary
+                        fullWidth={true}
+                        onClick={this.applyChangesToPrice}
+                        loading={this.state.isApplyPricesLoading}
+                        disabled={this.state.isApplyPricesDisabled} >
+                        Changer Prix
+                    </Button>
                 </FormLayout.Group>
+
+
                 <div style={{ height: "30px" }} />
-
-
             </div>
         )
     }
