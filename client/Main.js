@@ -211,6 +211,7 @@ export default class Main extends Component {
     render() {
         return (
             <div >
+                <div style={{ height: '10px' }} />
                 <FormLayout>
                     <Select
                         label="Genre"
