@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { GENRE, BASE, TAILLE, COULEUR } from './Variantes'
 import { Layout, TextField, FormLayout, Select, Button, ChoiceList, Banner } from '@shopify/polaris';
 
 export default class Main extends Component {
@@ -209,38 +209,6 @@ export default class Main extends Component {
 
 
     render() {
-        const genre = [
-            { label: "Tous", value: "" },
-            { label: "Hommes", value: "homme" },
-            { label: "Femmes", value: "femme" },
-            { label: "Enfants", value: "enfant" },
-            { label: "Bébés", value: "bébé" }
-        ]
-
-        const base = [
-            { label: "Tous", value: "" },
-            { label: "T-Shirts", value: "t-shirt" },
-            { label: "V-Necks", value: "v-neck" },
-            { label: "Manches Longues", value: "manches longues" },
-        ]
-
-        const taille = [
-            { label: "Tous", value: "" },
-            { label: "S", value: "S" },
-            { label: "M", value: "M" },
-            { label: "L", value: "L" },
-            { label: "XL", value: "XL" }
-        ]
-
-        const couleur = [
-            { label: "Tous", value: "" },
-            { label: "Black", value: "Black" },
-            { label: "Charcoal", value: "Charcoal" },
-            { label: "Grey", value: "Grey" },
-            { label: "White", value: "White" },
-        ]
-
-
         return (
             <div >
                 <Button fullWidth={true} loading={this.state.isFetchLoading} size="slim" onClick={this.fetchAllProducts}>Fetch</Button>
@@ -250,25 +218,25 @@ export default class Main extends Component {
                 <FormLayout>
                     <Select
                         label="Genre"
-                        options={genre}
+                        options={GENRE}
                         onChange={this.handleGenderChange}
                         value={this.state.gender}
                     />
                     <Select
                         label="Base"
-                        options={base}
+                        options={BASE}
                         onChange={this.handleBaseChange}
                         value={this.state.base}
                     />
                     <Select
                         label="Taille"
-                        options={taille}
+                        options={TAILLE}
                         onChange={this.handleSizeChange}
                         value={this.state.size}
                     />
                     <Select
                         label="Couleur"
-                        options={couleur}
+                        options={COULEUR}
                         onChange={this.handleColorChange}
                         value={this.state.color}
                     />
