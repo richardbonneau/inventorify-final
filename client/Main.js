@@ -122,9 +122,10 @@ export default class Main extends Component {
                             method: "POST",
                             body: JSON.stringify(inventoryBody)
                         }))
-                        .then(response => response.json())
+                        .then(response => {
+                            return response.json()
+                        })
                         .then(responseJson => {
-
                             array.push(responseJson);
                         })
                 );
@@ -246,7 +247,7 @@ export default class Main extends Component {
                         onClick={this.applyChangesToPrice}
                         loading={this.state.isApplyPricesLoading}
                         disabled={this.state.isApplyPricesDisabled} >
-                        Changer Prix
+                        Changer le Prix
                     </Button>
                 </FormLayout.Group>
 
