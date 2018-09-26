@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { GENRE, BASE, TAILLE, COULEUR } from './Variantes'
+import { GENRE, BASE, TAILLE, COULEUR, STORELOCATION } from './Variantes'
 import { Layout, TextField, FormLayout, Select, Button, ChoiceList, Banner } from '@shopify/polaris';
 
 export default class Main extends Component {
-    storeLocation = 14069366849;
-
     constructor(props) {
         super(props);
         this.state = {
@@ -33,9 +31,9 @@ export default class Main extends Component {
         }
     }
 
+
     componentDidMount = () => {
         this.fetchAllProducts();
-
     }
 
     fetchAllProducts = () => {
@@ -49,27 +47,13 @@ export default class Main extends Component {
 
             })
     }
-    //  REFACTORING: this could probably be one line of code instead of 5
+    //  REFACTORING: this could probably be two lines of code instead of 5
     putDataInState = (object) => {
         let list = [];
         object.products.forEach(product => {
             list.push(product);
         })
         this.setState({ fetched: list }, () => this.filterProducts())
-    }
-
-
-    handleGenderChange = (value) => {
-        this.setState({ gender: value }, () => this.filterProducts());
-    }
-    handleBaseChange = (value) => {
-        this.setState({ base: value }, () => this.filterProducts());
-    }
-    handleSizeChange = (value) => {
-        this.setState({ size: value }, () => this.filterProducts());
-    }
-    handleColorChange = (value) => {
-        this.setState({ color: value }, () => this.filterProducts());
     }
 
 
@@ -103,7 +87,6 @@ export default class Main extends Component {
             product.variants.forEach((variant) => {
                 letVariantIds.push(variant.id);
                 letInventoryIds.push(variant.inventory_item_id);
-
             })
         })
 
@@ -111,12 +94,9 @@ export default class Main extends Component {
             listProductsToModify: filterColor,
             variantIds: letVariantIds,
             inventoryIds: letInventoryIds
-        }, () => {
-            // console.log("filteredList", filterColor[0].variants)
-            // console.log("state", this.state.listProductsToModify)
         })
-
     }
+
 
     //  Apply Changes
     applyChangesToInventory = () => {
@@ -134,7 +114,7 @@ export default class Main extends Component {
             for (let i = 0; i < this.state.inventoryIds.length; i++) {
                 let inventoryBody = {
                     "inventory_item_id": this.state.inventoryIds[i],
-                    "location_id": this.storeLocation,
+                    "location_id": STORELOCATION,
                     "available": Number(this.state.quantityInput)
                 };
                 fetches.push(
@@ -208,6 +188,11 @@ export default class Main extends Component {
     handleSearchChange = (value) => { this.setState({ searchInput: value }) }
     handleQuantityChange = (value) => { this.setState({ quantityInput: value }) }
     handlePriceChange = (value) => { this.setState({ priceInput: value }) }
+
+    handleGenderChange = (value) => { this.setState({ gender: value }, () => this.filterProducts()); }
+    handleBaseChange = (value) => { this.setState({ base: value }, () => this.filterProducts()); }
+    handleSizeChange = (value) => { this.setState({ size: value }, () => this.filterProducts()); }
+    handleColorChange = (value) => { this.setState({ color: value }, () => this.filterProducts()); }
 
 
     render() {

@@ -40,3 +40,6 @@ export const COULEUR = [
     { label: "Grey", value: "Grey" },
     { label: "White", value: "White" },
 ]
+
+//  À modifier si on change de shopify store
+STORELOCATION = 14069366849;
