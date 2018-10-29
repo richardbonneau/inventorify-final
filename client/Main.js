@@ -208,6 +208,10 @@ export default class Main extends Component {
     render() {
         return (
             <div >
+                <Button
+                    onClick={console.log(this.state)}>
+                    Check State
+                    </Button>
                 <div style={{ height: '10px' }} />
                 <FormLayout>
                     <Select
