@@ -6,6 +6,8 @@ export default class Main extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            storeLocation: 0,
+
             fetched: [],
             isFetchLoading: false,
 
@@ -25,6 +27,7 @@ export default class Main extends Component {
             isApplyPricesLoading: false,
             isApplyInventoryDisabled: false,
             isApplyPricesDisabled: false,
+            disableTextInputs: false,
 
             numModifLeft: 0,
         }
@@ -39,7 +42,7 @@ export default class Main extends Component {
         console.log("in get location function")
         return fetch('/shopify/api/locations.json')
             .then(response => response.json())
-            .then(responseJson => console.log(responseJson))
+            .then(responseJson => this.setState({ storeLocation: responseJson[0].id }))
     }
 
     fetchAllProducts = () => {
@@ -113,13 +116,13 @@ export default class Main extends Component {
         let delay = 0;
 
         if (result == true) {
-            this.setState({ isApplyInventoryLoading: true, isApplyPricesDisabled: true })
+            this.setState({ isApplyInventoryLoading: true, isApplyPricesDisabled: true, disableTextInputs: true })
             let array = new Array();
             var fetches = [];
             for (let i = 0; i < this.state.inventoryIds.length; i++) {
                 let inventoryBody = {
                     "inventory_item_id": this.state.inventoryIds[i],
-                    "location_id": STORELOCATION,
+                    "location_id": this.state.storeLocation,
                     "available": Number(this.state.quantityInput)
                 };
                 fetches.push(
@@ -147,7 +150,7 @@ export default class Main extends Component {
         }
     }
 
-    //  TODO: Ajouter un throw error
+    //  TODO: Ajouter un throw error + vérification que les produits ciblés sont maintenant modifiés
     applyChangesToPrice = () => {
         let result = window.confirm(
             "Vous êtes sur le point de modifier le prix de " + this.state.inventoryIds.length + " variantes.\nÊtes-vous sûr de vouloir continuer?"
@@ -157,7 +160,7 @@ export default class Main extends Component {
         let delay = 0;
 
         if (result == true) {
-            this.setState({ isApplyPricesLoading: true, isApplyInventoryDisabled: true })
+            this.setState({ isApplyPricesLoading: true, isApplyInventoryDisabled: true, disableTextInputs: true })
             let array = new Array();
             var fetches = [];
             for (let i = 0; i < this.state.variantIds.length; i++) {
@@ -175,7 +178,7 @@ export default class Main extends Component {
                         }))
                         .then(response => response.json())
                         .then(responseJson => {
-                            // console.log(responseJson);
+                            console.log(responseJson);
                             array.push(responseJson)
                         })
                 );
@@ -236,8 +239,8 @@ export default class Main extends Component {
                 <div style={{ height: '15px' }} />
 
                 <FormLayout.Group>
-                    <TextField label="Quantité" type="number" onChange={this.handleQuantityChange} value={this.state.quantityInput} />
-                    <TextField label="Prix" prefix="$" type="number" onChange={this.handlePriceChange} value={this.state.priceInput} />
+                    <TextField disabled={this.state.disableTextInputs} label="Quantité" type="number" onChange={this.handleQuantityChange} value={this.state.quantityInput} />
+                    <TextField disabled={this.state.disableTextInputs} label="Prix" prefix="$" type="number" onChange={this.handlePriceChange} value={this.state.priceInput} />
                 </FormLayout.Group>
 
                 <FormLayout.Group>

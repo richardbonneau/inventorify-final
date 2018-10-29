@@ -1,6 +1,3 @@
-//  À modifier si on change de shopify store
-export const STORELOCATION = 14069366849;
-
 //  Les catégories GENRE et BASE font une recherche dans le titre des produits
 //  Les catégories TAILLE et COULEUR vont chercher le nom des variantes directement
 
