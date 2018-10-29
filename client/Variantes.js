@@ -1,3 +1,6 @@
+//  À modifier si on change de shopify store
+export const STORELOCATION = 14069366849;
+
 //  Les catégories GENRE et BASE font une recherche dans le titre des produits
 //  Les catégories TAILLE et COULEUR vont chercher le nom des variantes directement
 
@@ -35,11 +38,10 @@ export const TAILLE = [
 
 export const COULEUR = [
     { label: "Tous", value: "" },
-    { label: "Black", value: "Black" },
-    { label: "Charcoal", value: "Charcoal" },
-    { label: "Grey", value: "Grey" },
-    { label: "White", value: "White" },
+    { label: "Noir", value: "noir" },
+    { label: "Charbon", value: "charbon" },
+    { label: "Gris", value: "gris" },
+    { label: "Blanc", value: "blanc" },
 ]
 
-//  À modifier si on change de shopify store
-export const STORELOCATION = 14069366849;
+

@@ -30,9 +30,16 @@ export default class Main extends Component {
         }
     }
 
-
     componentDidMount = () => {
+        this.getLocation();
         this.fetchAllProducts();
+    }
+
+    getLocation = () => {
+        console.log("in get location function")
+        return fetch('/shopify/api/locations.json')
+            .then(response => response.json())
+            .then(responseJson => console.log(responseJson))
     }
 
     fetchAllProducts = () => {
@@ -41,9 +48,8 @@ export default class Main extends Component {
         return fetch('/shopify/api/products.json')
             .then(response => response.json())
             .then(responseJson => {
-                this.setState({ isFetchLoading: false })
+                this.setState({ isFetchLoading: false });
                 this.putDataInState(responseJson);
-
             })
     }
     //  REFACTORING: this could probably be two lines of code instead of 5
@@ -141,6 +147,7 @@ export default class Main extends Component {
         }
     }
 
+    //  TODO: Ajouter un throw error
     applyChangesToPrice = () => {
         let result = window.confirm(
             "Vous êtes sur le point de modifier le prix de " + this.state.inventoryIds.length + " variantes.\nÊtes-vous sûr de vouloir continuer?"
