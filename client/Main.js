@@ -66,8 +66,9 @@ export default class Main extends Component {
 
 
     filterProducts = () => {
-        let filterGender = this.state.fetched.filter((product) => product.title.toLowerCase().includes(this.state.gender));
-        let filterBase = filterGender.filter((product) => product.title.toLowerCase().includes(this.state.base));
+        let filterGender = this.state.fetched.filter((product) => product.tags.includes(this.state.gender));
+        // let filterGender = this.state.fetched.filter((product) => product.title.toLowerCase().includes(this.state.gender));
+        let filterBase = filterGender.filter((product) => product.product_type.includes(this.state.base));
         let filterSize = [...filterBase];
         filterSize.forEach((product) => {
             if (this.state.size !== "") {

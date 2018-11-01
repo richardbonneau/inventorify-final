@@ -1,19 +1,28 @@
-//  Les catégories GENRE et BASE font une recherche dans le titre des produits
-//  Les catégories TAILLE et COULEUR vont chercher le nom des variantes directement
+//  Les catégories GENRE et BASE font une recherche dans les produits
+//  Les catégories TAILLE et COULEUR vont chercher les variantes de produits
 
 export const GENRE = [
     { label: "Tous", value: "" },
-    { label: "Hommes", value: "homme" },
-    { label: "Femmes", value: "femme" },
-    { label: "Enfants", value: "enfant" },
-    { label: "Bébés", value: "bébé" }
+    { label: "Hommes", value: "gender:homme" },
+    { label: "Femmes", value: "gender:femme" },
+    { label: "Enfants", value: "gender:enfant" },
+    { label: "Bébés", value: "gender:bébé" },
+    { label: "Accessoires", value: "gender:accessoires" }
 ]
 
 export const BASE = [
     { label: "Tous", value: "" },
-    { label: "T-Shirts", value: "t-shirt" },
-    { label: "V-Necks", value: "v-neck" },
-    { label: "Manches Longues", value: "manches longues" },
+    { label: "T-shirt à poche", value: "T-shirt à poche" },
+    { label: "V-neck à poche", value: "V-neck à poche" },
+    { label: "T-shirt à manches longues à poche", value: "T-shirt à manches longues à poche" },
+    { label: "Chemise à manches longues", value: "Chemise à manches longues" },
+    { label: "Chemise à manches courtes", value: "Chemise à manches courtes" },
+    { label: "Boxer", value: "Boxers" },
+    { label: "Bas", value: "Bas" },
+    { label: "Casquette", value: "Casquette" },
+    { label: "Tuque", value: "Tuque" },
+    { label: "Étui de téléphone", value: "Étui de téléphone" }
+
 ]
 
 export const TAILLE = [
@@ -30,15 +39,16 @@ export const TAILLE = [
     { label: "2T", value: "2T" },
     { label: "3T", value: "3T" },
     { label: "4T", value: "4T" },
-    { label: "5-6T", value: "5-6T" },
+    { label: "5-6T", value: "5-6T" }
 ]
 
 export const COULEUR = [
     { label: "Tous", value: "" },
     { label: "Noir", value: "noir" },
-    { label: "Charbon", value: "charbon" },
-    { label: "Gris", value: "gris" },
     { label: "Blanc", value: "blanc" },
+    { label: "Charbon", value: "charbon" },
+    { label: "Gris", value: "gris" }
+
 ]
 
 
