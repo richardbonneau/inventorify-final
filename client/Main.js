@@ -76,7 +76,7 @@ export default class Main extends Component {
                     if (variant.option1 === this.state.size) newVariants.push(variant);
                 })
                 product.variants = newVariants
-            } else console.log("size !== '' ")
+            } else filterSize = [...filterBase];
         })
         let filterColor = [...filterSize];
         filterColor.forEach((product) => {
@@ -86,7 +86,7 @@ export default class Main extends Component {
                     if (variant.option2 === this.state.color) newVariants.push(variant);
                 })
                 product.variants = newVariants
-            } else console.log("color !== ''")
+            }
         })
 
         let letVariantIds = [];
