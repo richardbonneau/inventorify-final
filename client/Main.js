@@ -51,7 +51,7 @@ export default class Main extends Component {
         //     .then(responseJson => {
         //         this.putDataInState(responseJson);
         //     })
-        fetch("/admin/api/products/count.json")
+        fetch("/shopify/api/products/count.json")
             .then(response => response.json())
             .then(responseJson => console.log("count", responseJson))
 
