@@ -39,7 +39,6 @@ export default class Main extends Component {
     }
 
     getLocation = () => {
-        console.log("in get location function")
         return fetch('/shopify/api/locations.json')
             .then(response => response.json())
             .then(responseJson => this.setState({ storeLocation: responseJson[0].id }))
@@ -48,10 +47,10 @@ export default class Main extends Component {
     fetchAllProducts = () => {
         //  On reset l'array "listProducts" pour avoir un clean slate lorsque le user fait une nouvelle recherche
         this.setState({ listProducts: [], isFetchLoading: true })
-        return fetch('/shopify/api/products.json')
+        return fetch('/shopify/api/products.json?limit=250')
             .then(response => response.json())
             .then(responseJson => {
-                this.setState({ isFetchLoading: false });
+                console.log("res", responseJson)
                 this.putDataInState(responseJson);
             })
     }
@@ -69,18 +68,15 @@ export default class Main extends Component {
         let filterGender = this.state.fetched.filter((product) => product.tags.includes(this.state.gender));
         let filterBase = filterGender.filter((product) => product.product_type.includes(this.state.base));
         let filterSize = [...filterBase];
-        if (this.state.size !== "") {
-            filterSize.forEach((product) => {
-
+        filterSize.forEach((product) => {
+            if (this.state.size !== "") {
                 let newVariants = [];
                 product.variants.forEach((variant) => {
                     if (variant.option1 === this.state.size) newVariants.push(variant);
                 })
                 product.variants = newVariants
-
-            })
-        }
-
+            }
+        })
         let filterColor = [...filterSize];
         filterColor.forEach((product) => {
             if (this.state.color !== "") {
