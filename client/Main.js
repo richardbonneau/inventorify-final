@@ -51,11 +51,14 @@ export default class Main extends Component {
         //     .then(responseJson => {
         //         this.putDataInState(responseJson);
         //     })
+        let nbProducts = 0;
         fetch("/shopify/api/products/count.json")
             .then(response => response.json())
-            .then(responseJson => console.log("count", responseJson))
+            .then(responseJson => nbProducts = responseJson.count)
 
-        let nbProducts = 764;
+        console.log("nbProducts", nbProducts)
+
+
         let nbPages = Math.ceil(nbProducts / 250)
         let delayIncrement = 500;
         let delay = 0;
@@ -65,10 +68,11 @@ export default class Main extends Component {
         for (let i = 0; i < nbPages; i++) {
             fetches.push(
                 new Promise(resolve => setTimeout(resolve, delay)).then(() => {
+
                     fetch('/shopify/api/products.json?limit=250&page=' + i + 1)
                         .then(response => response.json())
                         .then(responseJson => {
-                            console.log(responseJson)
+                            console.log(i, "call", responseJson)
                             arr.push(responseJson)
                         })
                 })
