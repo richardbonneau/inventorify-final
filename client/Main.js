@@ -69,15 +69,18 @@ export default class Main extends Component {
         let filterGender = this.state.fetched.filter((product) => product.tags.includes(this.state.gender));
         let filterBase = filterGender.filter((product) => product.product_type.includes(this.state.base));
         let filterSize = [...filterBase];
-        filterSize.forEach((product) => {
-            if (this.state.size !== "") {
+        if (this.state.size !== "") {
+            filterSize.forEach((product) => {
+
                 let newVariants = [];
                 product.variants.forEach((variant) => {
                     if (variant.option1 === this.state.size) newVariants.push(variant);
                 })
                 product.variants = newVariants
-            } else filterSize = [...filterBase];
-        })
+
+            })
+        }
+
         let filterColor = [...filterSize];
         filterColor.forEach((product) => {
             if (this.state.color !== "") {
