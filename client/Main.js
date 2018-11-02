@@ -9,7 +9,6 @@ export default class Main extends Component {
             storeLocation: 0,
 
             fetched: [],
-            isFetchLoading: false,
 
             gender: "",
             base: "",
@@ -39,20 +38,48 @@ export default class Main extends Component {
     }
 
     getLocation = () => {
-        return fetch('/shopify/api/locations.json')
+        fetch('/shopify/api/locations.json')
             .then(response => response.json())
             .then(responseJson => this.setState({ storeLocation: responseJson[0].id }))
     }
 
     fetchAllProducts = () => {
-        //  On reset l'array "listProducts" pour avoir un clean slate lorsque le user fait une nouvelle recherche
-        this.setState({ listProducts: [], isFetchLoading: true })
-        return fetch('/shopify/api/products.json?limit=250')
+        // this.setState({ listProducts: [] })
+        // fetch
+        // fetch('/shopify/api/products.json?limit=250&page=1')
+        //     .then(response => response.json())
+        //     .then(responseJson => {
+        //         this.putDataInState(responseJson);
+        //     })
+        fetch("/admin/api/count.json")
             .then(response => response.json())
-            .then(responseJson => {
-                console.log("res", responseJson)
-                this.putDataInState(responseJson);
-            })
+            .then(responseJson => console.log(responseJson))
+
+        let nbProducts = 764;
+        let nbPages = Math.ceil(nbProducts / 250)
+        let delayIncrement = 500;
+        let delay = 0;
+
+        let arr = new Array();
+        var fetches = [];
+        for (let i = 0; i < nbPages; i++) {
+            fetches.push(
+                new Promise(resolve => setTimeout(resolve, delay)).then(() => {
+                    fetch('/shopify/api/products.json?limit=250&page=' + i + 1)
+                        .then(response => response.json())
+                        .then(responseJson => {
+                            console.log(responseJson)
+                            arr.push(responseJson)
+                        })
+                })
+            )
+            delay += delayIncrement
+        }
+        Promise.all(fetches).then(() => {
+            console.log("all products fetched", arr)
+        })
+
+
     }
     //  REFACTORING: this could probably be two lines of code instead of 5
     putDataInState = (object) => {
