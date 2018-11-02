@@ -51,9 +51,9 @@ export default class Main extends Component {
         //     .then(responseJson => {
         //         this.putDataInState(responseJson);
         //     })
-        fetch("/admin/api/count.json")
+        fetch("/admin/api/products/count.json")
             .then(response => response.json())
-            .then(responseJson => console.log(responseJson))
+            .then(responseJson => console.log("count", responseJson))
 
         let nbProducts = 764;
         let nbPages = Math.ceil(nbProducts / 250)
