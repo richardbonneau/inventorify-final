@@ -66,7 +66,7 @@ export default class Main extends Component {
 
         let arr = new Array();
         var fetches = [];
-        for (let i = 0; i < 1; i++) {
+        for (let i = 0; i < nbPages; i++) {
             console.log("in loop, i:", i);
             fetches.push(
                 new Promise(resolve => setTimeout(resolve, delay)).then(() =>
