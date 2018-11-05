@@ -80,7 +80,7 @@ export default class Main extends Component {
         }
         Promise.all(fetches).then(() => {
             console.log("all products fetched", arr)
-            this.putDataInState(arr);
+            //this.putDataInState(arr);
         })
 
 
