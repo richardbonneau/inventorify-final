@@ -64,7 +64,7 @@ export default class Main extends Component {
         let delayIncrement = 500;
         let delay = 0;
 
-        let arr = new Array();
+        let obj = { products: [] };
         var fetches = [];
         for (let i = 0; i < nbPages; i++) {
             console.log("in loop, i:", i);
@@ -76,15 +76,15 @@ export default class Main extends Component {
                     .then(response => response.json())
                     .then(responseJson => {
                         console.log(i, "call", responseJson)
-                        // arr.push(responseJson)
+                        obj.products = [...obj.products, ...responseJson.products]
 
                     })
             )
             delay += delayIncrement
         }
         Promise.all(fetches).then(() => {
-            console.log("all products fetched", arr)
-            //this.putDataInState(arr);
+            console.log("all products fetched", obj)
+            this.putDataInState(obj);
         })
 
 
