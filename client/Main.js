@@ -71,12 +71,13 @@ export default class Main extends Component {
             fetches.push(
                 new Promise(resolve => setTimeout(resolve, delay)).then(() =>
 
-                    // fetch('/shopify/api/products.json?limit=250&page=' + (i + 1)))
-                    fetch('/shopify/api/products.json?limit=250&page=1'))
+                    fetch('/shopify/api/products.json?limit=250&page=' + (i + 1)))
+
                     .then(response => response.json())
                     .then(responseJson => {
                         console.log(i, "call", responseJson)
-                        arr.push(responseJson)
+                        // arr.push(responseJson)
+
                     })
             )
             delay += delayIncrement
