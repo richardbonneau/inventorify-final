@@ -33,55 +33,53 @@ export default class Main extends Component {
     }
 
     componentDidMount = () => {
-        this.getLocation();
+        this.getLocationAndCount();
         this.fetchAllProducts();
     }
 
-    getLocation = () => {
+    getLocationAndCount = () => {
         fetch('/shopify/api/locations.json')
             .then(response => response.json())
             .then(responseJson => this.setState({ storeLocation: responseJson[0].id }))
     }
 
     fetchAllProducts = () => {
-        // this.setState({ listProducts: [] })
-        // fetch
-        // fetch('/shopify/api/products.json?limit=250&page=1')
-        //     .then(response => response.json())
-        //     .then(responseJson => {
-        //         this.putDataInState(responseJson);
-        //     })
-        let nbProducts = 0;
-        fetch("/shopify/api/products/count.json")
+        this.setState({ listProducts: [] })
+        fetch
+        fetch('/shopify/api/products.json?limit=250&page=1')
             .then(response => response.json())
-            .then(responseJson => nbProducts = responseJson.count)
+            .then(responseJson => {
+                this.putDataInState(responseJson);
+            })
+        let nbProducts = 0;
+
 
         console.log("nbProducts", nbProducts)
 
 
-        let nbPages = Math.ceil(nbProducts / 250)
-        let delayIncrement = 500;
-        let delay = 0;
+        // let nbPages = Math.ceil(nbProducts / 250)
+        // let delayIncrement = 500;
+        // let delay = 0;
 
-        let arr = new Array();
-        var fetches = [];
-        for (let i = 0; i < nbPages; i++) {
-            fetches.push(
-                new Promise(resolve => setTimeout(resolve, delay)).then(() => {
+        // let arr = new Array();
+        // var fetches = [];
+        // for (let i = 0; i < nbPages; i++) {
+        //     fetches.push(
+        //         new Promise(resolve => setTimeout(resolve, delay)).then(() => {
 
-                    fetch('/shopify/api/products.json?limit=250&page=' + i + 1)
-                        .then(response => response.json())
-                        .then(responseJson => {
-                            console.log(i, "call", responseJson)
-                            arr.push(responseJson)
-                        })
-                })
-            )
-            delay += delayIncrement
-        }
-        Promise.all(fetches).then(() => {
-            console.log("all products fetched", arr)
-        })
+        //             fetch('/shopify/api/products.json?limit=250&page=' + i + 1)
+        //                 .then(response => response.json())
+        //                 .then(responseJson => {
+        //                     console.log(i, "call", responseJson)
+        //                     arr.push(responseJson)
+        //                 })
+        //         })
+        //     )
+        //     delay += delayIncrement
+        // }
+        // Promise.all(fetches).then(() => {
+        //     console.log("all products fetched", arr)
+        // })
 
 
     }
