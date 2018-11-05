@@ -54,7 +54,7 @@ export default class Main extends Component {
 
 
 
-        let nbProducts = 0;
+        let nbProducts = 1150;
 
 
         console.log("nbProducts", nbProducts)
