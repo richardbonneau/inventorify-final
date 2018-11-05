@@ -44,13 +44,14 @@ export default class Main extends Component {
     }
 
     fetchAllProducts = () => {
-        // this.setState({ listProducts: [] })
-        // fetch
+        this.setState({ listProducts: [] })
+
         // fetch('/shopify/api/products.json?limit=250&page=1')
         //     .then(response => response.json())
         //     .then(responseJson => {
         //         this.putDataInState(responseJson);
         //     })
+
 
 
         let nbProducts = 0;
@@ -65,13 +66,13 @@ export default class Main extends Component {
 
         let arr = new Array();
         var fetches = [];
-        for (let i = 0; i < nbPages; i++) {
+        for (let i = 0; i < 1; i++) {
             console.log("in loop, i:", i);
             fetches.push(
                 new Promise(resolve => setTimeout(resolve, delay)).then(() =>
 
                     // fetch('/shopify/api/products.json?limit=250&page=' + (i + 1)))
-                    fetch('/shopify/api/products.json?limit=250&page='))
+                    fetch('/shopify/api/products.json?limit=250&page=1'))
                     .then(response => response.json())
                     .then(responseJson => {
                         console.log(i, "call", responseJson)
