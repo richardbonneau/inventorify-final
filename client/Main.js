@@ -66,6 +66,7 @@ export default class Main extends Component {
         let arr = new Array();
         var fetches = [];
         for (let i = 0; i < nbPages; i++) {
+            console.log("in loop, i:", i);
             fetches.push(
                 new Promise(resolve => setTimeout(resolve, delay)).then(() =>
                     fetch('/shopify/api/products.json?limit=250&page=' + i + 1))
@@ -79,6 +80,7 @@ export default class Main extends Component {
         }
         Promise.all(fetches).then(() => {
             console.log("all products fetched", arr)
+            this.putDataInState(arr);
         })
 
 
