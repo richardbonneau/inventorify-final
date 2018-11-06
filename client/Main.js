@@ -39,16 +39,19 @@ export default class Main extends Component {
     }
 
     getLocationAndCount = () => {
+        console.log("in location and count function")
         let storeLocation;
         let productCount;
         fetch('/shopify/api/locations.json')
             .then(response => response.json())
             .then(responseJson => {
+                console.log("first response", responseJson)
                 storeLocation = responseJson[0].id
                 return fetch('shopify/api/products/count.json')
             })
             .then(response => response.json())
             .then(responseJson => {
+                console.log("second response", responseJson)
                 productCount = responseJson
                 console.log("storeLocation", storeLocation)
                 console.log("productCount", productCount)
@@ -56,6 +59,7 @@ export default class Main extends Component {
                     storeLocation: storeLocation,
                     productCount: productCount
                 })
+                return
             })
     }
 
