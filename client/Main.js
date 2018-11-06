@@ -45,8 +45,8 @@ export default class Main extends Component {
         return fetch('/shopify/api/locations.json')
             .then(response => response.json())
             .then(responseJson => {
-                console.log("first response", responseJson, "id", responseJson[0].id)
-                storeLocation = responseJson[0].id
+                console.log("first response", responseJson)
+                // storeLocation = responseJson[0].id
                 return fetch('shopify/api/products/count.json')
             })
             .then(response => response.json())
