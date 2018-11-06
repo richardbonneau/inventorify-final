@@ -263,10 +263,12 @@ export default class Main extends Component {
     render() {
         return (
             <div >
-                <Button
-                    onClick={console.log(this.state)}>
-                    Check State
-                    </Button>
+                <div style={{ display: flex }}>
+                    <div>Produits à modifier: {this.state.listProductsToModify.length}</div>
+                    <div style={{ width: "10px" }} />
+                    <div>Variantes à modifier: {this.state.variantIds.length}</div>
+                </div>
+
                 <div style={{ height: '10px' }} />
                 <FormLayout>
                     <Select
