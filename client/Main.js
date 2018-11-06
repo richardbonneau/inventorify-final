@@ -45,8 +45,8 @@ export default class Main extends Component {
         return fetch('/shopify/api/locations.json')
             .then(response => response.json())
             .then(responseJson => {
-                console.log("first response", responseJson)
-                // storeLocation = responseJson[0].id
+                console.log("first response", responseJson, "id", responseJson.locations[0])
+                storeLocation = responseJson.locations[0].id
                 return fetch('shopify/api/products/count.json')
             })
             .then(response => response.json())
@@ -80,8 +80,8 @@ export default class Main extends Component {
 
         console.log("nbProducts", nbProducts)
 
-        //let nbPages = Math.ceil(this.state.productCount / 250)
-        let nbPages = Math.ceil(nbProducts / 250)
+        let nbPages = Math.ceil(this.state.productCount / 250)
+        //let nbPages = Math.ceil(nbProducts / 250)
         let delayIncrement = 500;
         let delay = 0;
 
