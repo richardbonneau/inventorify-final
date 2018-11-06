@@ -7,6 +7,7 @@ export default class Main extends Component {
         super(props);
         this.state = {
             storeLocation: 0,
+            productCount: 0,
 
             fetched: [],
 
@@ -38,10 +39,25 @@ export default class Main extends Component {
     }
 
     getLocationAndCount = () => {
+        let storeLocation;
+        let productCount;
         fetch('/shopify/api/locations.json')
             .then(response => response.json())
-            .then(responseJson => this.setState({ storeLocation: responseJson[0].id }))
+            .then(responseJson => storeLocation = responseJson[0].id)
+            .then(() => fetch('shopify/api/products/count.json'))
+            .then(response => response.json())
+            .then(responseJson => productCount = responseJson)
+            .then(() => {
+                console.log("storeLocation", storeLocation)
+                console.log("productCount", productCount)
+                this.setState({
+                    storeLocation: storeLocation,
+                    productCount: productCount
+                })
+            }
+            )
     }
+
 
     fetchAllProducts = () => {
         this.setState({ listProducts: [] })
