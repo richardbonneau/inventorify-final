@@ -39,22 +39,17 @@ export default class Main extends Component {
     }
 
     getLocationAndCount = () => {
-        console.log("in location and count function")
         let storeLocation;
         let productCount;
         return fetch('/shopify/api/locations.json')
             .then(response => response.json())
             .then(responseJson => {
-                console.log("first response", responseJson, "id", responseJson.locations[0])
                 storeLocation = responseJson.locations[0].id
                 return fetch('shopify/api/products/count.json')
             })
             .then(response => response.json())
             .then(responseJson => {
-                console.log("second response", responseJson)
                 productCount = responseJson.count
-                console.log("storeLocation", storeLocation)
-                console.log("productCount", productCount)
                 this.setState({
                     storeLocation: storeLocation,
                     productCount: productCount
@@ -67,26 +62,12 @@ export default class Main extends Component {
     fetchAllProducts = () => {
         this.setState({ listProducts: [] })
 
-        // fetch('/shopify/api/products.json?limit=250&page=1')
-        //     .then(response => response.json())
-        //     .then(responseJson => {
-        //         this.putDataInState(responseJson);
-        //     })
-
-
-
-        let nbProducts = 1150;
-
-
-        console.log("nbProducts", nbProducts)
-
         let nbPages = Math.ceil(this.state.productCount / 250)
-        //let nbPages = Math.ceil(nbProducts / 250)
         let delayIncrement = 500;
         let delay = 0;
-
         let obj = { products: [] };
         var fetches = [];
+
         for (let i = 0; i < nbPages; i++) {
             console.log("in loop, i:", i);
             fetches.push(
@@ -107,8 +88,6 @@ export default class Main extends Component {
             console.log("all products fetched", obj)
             this.putDataInState(obj);
         })
-
-
     }
     //  REFACTORING: this could probably be two lines of code instead of 5
     putDataInState = (object) => {
@@ -263,7 +242,7 @@ export default class Main extends Component {
     render() {
         return (
             <div >
-                <div style={{ display: flex }}>
+                <div style={{ display: "flex" }}>
                     <div>Produits à modifier: {this.state.listProductsToModify.length}</div>
                     <div style={{ width: "10px" }} />
                     <div>Variantes à modifier: {this.state.variantIds.length}</div>
