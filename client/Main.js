@@ -52,7 +52,7 @@ export default class Main extends Component {
             .then(response => response.json())
             .then(responseJson => {
                 console.log("second response", responseJson)
-                productCount = responseJson
+                productCount = responseJson.count
                 console.log("storeLocation", storeLocation)
                 console.log("productCount", productCount)
                 this.setState({
