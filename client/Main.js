@@ -31,9 +31,8 @@ export default class Main extends Component {
 
             numModifLeft: 0,
 
-            disableCouleur: true,
-            disableTaille: true,
-            disableGenreEtBase: true
+            disableCouleur: false,
+            disableTaille: false
         }
     }
 
@@ -99,12 +98,7 @@ export default class Main extends Component {
         object.products.forEach(product => {
             list.push(product);
         })
-        this.setState({
-            fetched: list,
-            disableCouleur: false,
-            disableTaille: false,
-            disableGenreEtBase: false
-        }, () => this.filterProducts())
+        this.setState({ fetched: list }, () => this.filterProducts())
     }
 
 
@@ -183,6 +177,7 @@ export default class Main extends Component {
                 );
                 delay += delayIncrement
             }
+
             Promise.all(fetches).then(() => {
                 console.log("all", array.length, "fetches done")
                 this.setState({ isApplyInventoryLoading: false })
@@ -260,14 +255,13 @@ export default class Main extends Component {
                     options={GENRE}
                     onChange={this.handleGenderChange}
                     value={this.state.gender}
-                    disabled={this.state.disableGenreEtBase}
                 />
                 <Select
                     label="Base"
                     options={BASE}
                     onChange={this.handleBaseChange}
                     value={this.state.base}
-                    disabled={this.state.disableGenreEtBase}
+
                 />
                 <Select
                     label="Taille"
