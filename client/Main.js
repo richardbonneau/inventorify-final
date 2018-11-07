@@ -36,6 +36,7 @@ export default class Main extends Component {
         }
     }
 
+
     componentDidMount = () => {
         this.getLocationAndCount();
     }
