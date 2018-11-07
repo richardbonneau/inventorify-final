@@ -183,7 +183,6 @@ export default class Main extends Component {
                 );
                 delay += delayIncrement
             }
-
             Promise.all(fetches).then(() => {
                 console.log("all", array.length, "fetches done")
                 this.setState({ isApplyInventoryLoading: false })
