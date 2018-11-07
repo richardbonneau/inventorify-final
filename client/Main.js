@@ -65,25 +65,7 @@ export default class Main extends Component {
     fetchAllProducts = () => {
         this.setState({ listProducts: [] })
 
-<<<<<<< HEAD
-        // fetch('/shopify/api/products.json?limit=250&page=1')
-        //     .then(response => response.json())
-        //     .then(responseJson => {
-        //         this.putDataInState(responseJson);
-        //     })
-
-
-        // fetch products.count and attribute it to nbProducts
-        let nbProducts = 1150;
-
-
-        console.log("nbProducts", nbProducts)
-
-
-        let nbPages = Math.ceil(nbProducts / 250)
-=======
         let nbPages = Math.ceil(this.state.productCount / 250)
->>>>>>> 1391594f9e6d246fcf873afd9b8e7f59ce0686f9
         let delayIncrement = 500;
         let delay = 0;
         let obj = { products: [] };
@@ -261,6 +243,7 @@ export default class Main extends Component {
 
 
     render() {
+        console.log(this.state);
         return (
             <div >
                 <div style={{ display: "flex" }}>
