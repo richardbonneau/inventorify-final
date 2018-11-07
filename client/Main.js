@@ -29,6 +29,9 @@ export default class Main extends Component {
             disableTextInputs: false,
 
             numModifLeft: 0,
+
+            disableCouleur: false,
+            disableTaille: false
         }
     }
 
@@ -53,7 +56,7 @@ export default class Main extends Component {
         //     })
 
 
-
+        // fetch products.count and attribute it to nbProducts
         let nbProducts = 1150;
 
 
@@ -235,8 +238,8 @@ export default class Main extends Component {
 
     handleGenderChange = (value) => { this.setState({ gender: value }, () => this.filterProducts()); }
     handleBaseChange = (value) => { this.setState({ base: value }, () => this.filterProducts()); }
-    handleSizeChange = (value) => { this.setState({ size: value }, () => this.filterProducts()); }
-    handleColorChange = (value) => { this.setState({ color: value }, () => this.filterProducts()); }
+    handleSizeChange = (value) => { this.setState({ size: value, disableTaille: true }, () => this.filterProducts()); }
+    handleColorChange = (value) => { this.setState({ color: value, disableCouleur: true }, () => this.filterProducts()); }
 
 
     render() {
@@ -265,12 +268,14 @@ export default class Main extends Component {
                         options={TAILLE}
                         onChange={this.handleSizeChange}
                         value={this.state.size}
+                        disabled={this.state.disableTaille}
                     />
                     <Select
                         label="Couleur"
                         options={COULEUR}
                         onChange={this.handleColorChange}
                         value={this.state.color}
+                        disabled={this.state.disableCouleur}
                     />
                 </FormLayout>
 
