@@ -7,6 +7,7 @@ export default class Main extends Component {
         super(props);
         this.state = {
             storeLocation: 0,
+            productCount: 0,
 
             fetched: [],
 
@@ -37,18 +38,34 @@ export default class Main extends Component {
 
     componentDidMount = () => {
         this.getLocationAndCount();
-        this.fetchAllProducts();
+
     }
 
     getLocationAndCount = () => {
-        fetch('/shopify/api/locations.json')
+        let storeLocation;
+        let productCount;
+        return fetch('/shopify/api/locations.json')
             .then(response => response.json())
-            .then(responseJson => this.setState({ storeLocation: responseJson[0].id }))
+            .then(responseJson => {
+                storeLocation = responseJson.locations[0].id
+                return fetch('shopify/api/products/count.json')
+            })
+            .then(response => response.json())
+            .then(responseJson => {
+                productCount = responseJson.count
+                this.setState({
+                    storeLocation: storeLocation,
+                    productCount: productCount
+                })
+                this.fetchAllProducts();
+            })
     }
+
 
     fetchAllProducts = () => {
         this.setState({ listProducts: [] })
 
+<<<<<<< HEAD
         // fetch('/shopify/api/products.json?limit=250&page=1')
         //     .then(response => response.json())
         //     .then(responseJson => {
@@ -64,11 +81,14 @@ export default class Main extends Component {
 
 
         let nbPages = Math.ceil(nbProducts / 250)
+=======
+        let nbPages = Math.ceil(this.state.productCount / 250)
+>>>>>>> 1391594f9e6d246fcf873afd9b8e7f59ce0686f9
         let delayIncrement = 500;
         let delay = 0;
-
         let obj = { products: [] };
         var fetches = [];
+
         for (let i = 0; i < nbPages; i++) {
             console.log("in loop, i:", i);
             fetches.push(
@@ -89,8 +109,6 @@ export default class Main extends Component {
             console.log("all products fetched", obj)
             this.putDataInState(obj);
         })
-
-
     }
     //  REFACTORING: this could probably be two lines of code instead of 5
     putDataInState = (object) => {
@@ -245,10 +263,12 @@ export default class Main extends Component {
     render() {
         return (
             <div >
-                <Button
-                    onClick={console.log(this.state)}>
-                    Check State
-                    </Button>
+                <div style={{ display: "flex" }}>
+                    <div>Produits à modifier: {this.state.listProductsToModify.length}</div>
+                    <div style={{ width: "10px" }} />
+                    <div>Variantes à modifier: {this.state.variantIds.length}</div>
+                </div>
+
                 <div style={{ height: '10px' }} />
                 <FormLayout>
                     <Select
