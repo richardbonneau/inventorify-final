@@ -31,8 +31,9 @@ export default class Main extends Component {
 
             numModifLeft: 0,
 
-            disableCouleur: false,
-            disableTaille: false
+            disableCouleur: true,
+            disableTaille: true,
+            disableGenreEtBase: true
         }
     }
 
@@ -98,7 +99,12 @@ export default class Main extends Component {
         object.products.forEach(product => {
             list.push(product);
         })
-        this.setState({ fetched: list }, () => this.filterProducts())
+        this.setState({
+            fetched: list,
+            disableCouleur: false,
+            disableTaille: false,
+            disableGenreEtBase: false
+        }, () => this.filterProducts())
     }
 
 
@@ -245,71 +251,69 @@ export default class Main extends Component {
     render() {
         console.log(this.state);
         return (
-            <div >
-                <div style={{ display: "flex" }}>
-                    <div>Produits à modifier: {this.state.listProductsToModify.length}</div>
-                    <div style={{ width: "10px" }} />
-                    <div>Variantes à modifier: {this.state.variantIds.length}</div>
-                </div>
+            <div ></div>
+            <div>Variantes à modifier: {this.state.variantIds.length}</div>
 
-                <div style={{ height: '10px' }} />
-                <FormLayout>
-                    <Select
-                        label="Genre"
-                        options={GENRE}
-                        onChange={this.handleGenderChange}
-                        value={this.state.gender}
-                    />
-                    <Select
-                        label="Base"
-                        options={BASE}
-                        onChange={this.handleBaseChange}
-                        value={this.state.base}
-                    />
-                    <Select
-                        label="Taille"
-                        options={TAILLE}
-                        onChange={this.handleSizeChange}
-                        value={this.state.size}
-                        disabled={this.state.disableTaille}
-                    />
-                    <Select
-                        label="Couleur"
-                        options={COULEUR}
-                        onChange={this.handleColorChange}
-                        value={this.state.color}
-                        disabled={this.state.disableCouleur}
-                    />
-                </FormLayout>
+            <div style={{ height: '10px' }} />
+            <FormLayout>
+                <Select
+                    label="Genre"
+                    options={GENRE}
+                    onChange={this.handleGenderChange}
+                    value={this.state.gender}
+                    disabled={this.state.disableGenreEtBase}
+                />
+                <Select
+                    label="Base"
+                    options={BASE}
+                    onChange={this.handleBaseChange}
+                    value={this.state.base}
+                    disabled={this.state.disableGenreEtBase}
+                />
+                <Select
+                    label="Taille"
+                    options={TAILLE}
+                    onChange={this.handleSizeChange}
+                    value={this.state.size}
+                    disabled={this.state.disableTaille}
+                />
+                <Select
+                    label="Couleur"
+                    options={COULEUR}
+                    onChange={this.handleColorChange}
+                    value={this.state.color}
+                    disabled={this.state.disableCouleur}
+                />
+            </FormLayout>
 
-                <div style={{ height: '15px' }} />
+            <div style={{ height: '15px' }} />
 
-                <FormLayout.Group>
-                    <TextField disabled={this.state.disableTextInputs} label="Quantité" type="number" onChange={this.handleQuantityChange} value={this.state.quantityInput} />
-                    <TextField disabled={this.state.disableTextInputs} label="Prix" prefix="$" type="number" onChange={this.handlePriceChange} value={this.state.priceInput} />
-                </FormLayout.Group>
+            <FormLayout.Group>
+                <TextField disabled={this.state.disableTextInputs} label="Quantité" type="number" onChange={this.handleQuantityChange} value={this.state.quantityInput} />
+                <TextField disabled={this.state.disableTextInputs} label="Prix" prefix="$" type="number" onChange={this.handlePriceChange} value={this.state.priceInput} />
+            </FormLayout.Group>
 
-                <FormLayout.Group>
-                    <Button primary
-                        fullWidth={true}
-                        onClick={this.applyChangesToInventory}
-                        loading={this.state.isApplyInventoryLoading}
-                        disabled={this.state.isApplyInventoryDisabled} >
-                        Changer l'Inventaire
+            <FormLayout.Group>
+                <Button primary
+                    fullWidth={true}
+                    onClick={this.applyChangesToInventory}
+                    loading={this.state.isApplyInventoryLoading}
+                    disabled={this.state.isApplyInventoryDisabled} >
+                    Changer l'Inventaire
                     </Button>
 
-                    <Button primary
-                        fullWidth={true}
-                        onClick={this.applyChangesToPrice}
-                        loading={this.state.isApplyPricesLoading}
-                        disabled={this.state.isApplyPricesDisabled} >
-                        Changer le Prix
+                <Button primary
+                    fullWidth={true}
+                    onClick={this.applyChangesToPrice}
+                    loading={this.state.isApplyPricesLoading}
+                    disabled={this.state.isApplyPricesDisabled} >
+                    Changer le Prix
                     </Button>
-                </FormLayout.Group>
+            </FormLayout.Group>
 
 
-                <div style={{ height: "30px" }} />
-            </div>
+            <div style={{ height: "30px" }} />
+            </div >
         )
     }
 }
