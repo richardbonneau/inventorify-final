@@ -15,6 +15,7 @@ export const BASE = [
     { label: "T-shirt à poche", value: "T-shirt à poche" },
     { label: "V-neck à poche", value: "V-neck à poche" },
     { label: "T-shirt à manches longues à poche", value: "T-shirt à manches longues à poche" },
+    { label: "Camisole à poche", value: "Camisole à poche" },
     { label: "Chemise à manches longues", value: "Chemise à manches longues" },
     { label: "Chemise à manches courtes", value: "Chemise à manches courtes" },
     { label: "Boxer", value: "Boxers" },
