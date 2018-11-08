@@ -158,7 +158,14 @@ export default class Main extends Component {
         let delay = 0;
 
         if (result == true) {
-            this.setState({ isApplyInventoryLoading: true, isApplyPricesDisabled: true, disableTextInputs: true })
+            this.setState({
+                isApplyInventoryLoading: true,
+                isApplyPricesDisabled: true,
+                disableTextInputs: true,
+                disableGenreEtBase: true,
+                disableCouleur: true,
+                disableTaille: true
+            })
             let array = new Array();
             var fetches = [];
             for (let i = 0; i < this.state.inventoryIds.length; i++) {
@@ -202,7 +209,14 @@ export default class Main extends Component {
         let delay = 0;
 
         if (result == true) {
-            this.setState({ isApplyPricesLoading: true, isApplyInventoryDisabled: true, disableTextInputs: true })
+            this.setState({
+                isApplyPricesLoading: true,
+                isApplyInventoryDisabled: true,
+                disableTextInputs: true,
+                disableGenreEtBase: true,
+                disableCouleur: true,
+                disableTaille: true
+            })
             let array = new Array();
             var fetches = [];
             for (let i = 0; i < this.state.variantIds.length; i++) {
